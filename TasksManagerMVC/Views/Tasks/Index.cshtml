@@ -1,0 +1,45 @@
+@model IEnumerable<TasksManagerMVC.Models.TaskItem>
+
+@{
+    ViewData["Title"] = "Task Manager";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Task</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCompleted)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @(item.IsCompleted ? "✓" : "")
+                </td>
+                <td>
+                    <form asp-action="ToggleComplete" asp-route-id="@item.Id" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-sm @(item.IsCompleted ? "btn-warning" : "btn-success")">
+                            @(item.IsCompleted ? "Mark Incomplete" : "Mark Complete")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
