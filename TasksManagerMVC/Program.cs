@@ -28,6 +28,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Tasks}/{action=Index}/{id?}");
+
 app.MapStaticAssets();
 
 app.MapControllerRoute(
