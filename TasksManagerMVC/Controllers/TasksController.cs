@@ -54,5 +54,21 @@ namespace TasksManagerMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        // POST: Tasks/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var taskItem = await _context.Tasks.FindAsync(id);
+            if (taskItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.Tasks.Remove(taskItem);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

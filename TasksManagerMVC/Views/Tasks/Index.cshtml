@@ -38,6 +38,10 @@
                             @(item.IsCompleted ? "Mark Incomplete" : "Mark Complete")
                         </button>
                     </form>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display: inline;"
+                        onsubmit="return confirm('Are you sure you want to delete this task?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         }
